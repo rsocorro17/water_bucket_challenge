@@ -1,4 +1,4 @@
-package com.challenge.springboot.api.water_bucket;
+
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -8,11 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.challenge.springboot.api.water_bucket.WaterBucketApplication;
 import com.challenge.springboot.api.water_bucket.services.WaterJugService;
 import com.challenge.springboot.api.water_bucket.wrappers.SolutionWrapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(classes = WaterBucketApplication.class)
 public class WaterJugServiceTest {
     private WaterJugService waterJugService;
 
@@ -32,7 +33,7 @@ public class WaterJugServiceTest {
     @Test
     void testNoSolutionFoundForSomeCases() {
         SolutionWrapper result = waterJugService.solve(3, 5, 7);
-        assertThat(result.getSolution()).isEmpty();
+        assertThat(result.getSolution()).isNotEmpty();
         assertThat(result.getSolution().size()).isEqualTo(1);
         Map<String, Object> statusMap = (Map<String, Object>) result.getSolution().get(0);
         assertThat(statusMap).containsEntry("action", "No Solution Found");
