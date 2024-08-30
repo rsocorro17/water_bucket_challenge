@@ -51,6 +51,190 @@ La estructura del proyecto se define de la siguiente forma:
 │   └── test # contains unit test proyect
 ```
 
+# Water Bucket API
+
+This API solves the water jug problem using Spring Boot and Java.
+
+### API Routes
+
+The only route exposed by this API is:
+
+```bash
+
+POST /api/waterjug
+
+```
+
+This route accepts POST requests with application/json content type.
+
+### Request Payload
+
+The expected payload for the POST request has the following structure:
+
+```bash
+
+JSON
+
+{"xCapacity": <int>, "yCapacity": <int>, "zAmountWanted": <int>}
+
+```
+
+
+Where:
+- `xCapacity`: Capacity of the first jug
+- `yCapacity`: Capacity of the second jug
+- `zAmountWanted`: Target volume
+
+Example of a valid payload:
+
+```bash
+
+JSON
+
+{ "xCapacity": 5, "yCapacity": 3, "zAmountWanted": 4 }
+
+```
+
+### Response Output
+
+The response will be a JSON object with the following structure:
+
+```bash
+
+JSON
+
+{ "solution": [ { "x": <int>, "y": <int>, "steps": [<array>] } ] }
+
+```
+
+Where:
+- `x`: Amount of water in the first jug
+- `y`: Amount of water in the second jug
+- `steps`: Array of steps to reach the solution
+
+### Port Configuration
+
+To assign a specific port to the API on localhost, modify the `application.properties` file:
+
+properties server.port=<your-preferred-port>
+
+For example, to use port 8081:
+
+properties server.port=8081
+
+### Build Commands
+
+To compile and run the API, follow these steps:
+
+1. Build the application:
+
+```bash
+
+./mvnw clean package
+
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< com.challenge.springboot.api:water_bucket >--------------
+[INFO] Building water_bucket 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ water_bucket ---
+[INFO] Deleting c:\Desarrollo\water_bucket_challenge\target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.945 s
+[INFO] Finished at: 2024-08-30T18:35:46-04:00
+[INFO] ------------------------------------------------------------------------
+
+```
+
+2. Run the application:
+
+```bash
+
+java -jar target/water-bucket.jar
+
+c:; cd 'c:\Desarrollo\water_bucket_challenge'; & 'C:\Program Files\Java\jdk-17\bin\java.exe' '-agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=localhost:64927' '@C:\Users\dudle\AppData\Local\Temp\cp_smrxjugj2axv8pfcx0reat5d.argfile' 'com.challenge.springboot.api.water_bucket.WaterBucketApplication'
+emp\x5ccp_smrxjugj2axv8pfcx0reat5d.argfile' 'com.challenge.springboot.api.water_bucket.WaterBucketApplication' ;e2031475-9fb3-449b-8cb5-c278a80754ff
+  .   ____          _            __ _ _   
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \  
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \ 
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / / 
+ =========|_|==============|___/=/_/_/_/  
+ :: Spring Boot ::                (v3.3.2)
+
+2024-08-30T18:38:28.402-04:00  INFO 3524 --- [water_bucket] [  restartedMain] c.c.s.a.w.WaterBucketApplication         : Starting WaterBucketApplication using Java 17.0.8 with PID 3524 (C:\Desarrollo\water_bucket_challenge\target\classes started by dudle in C:\Desarrollo\water_bucket_challenge)
+2024-08-30T18:38:28.410-04:00  INFO 3524 --- [water_bucket] [  restartedMain] c.c.s.a.w.WaterBucketApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-08-30T18:38:29.251-04:00  INFO 3524 --- [water_bucket] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable    
+2024-08-30T18:38:29.518-04:00  INFO 3524 --- [water_bucket] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'  
+2024-08-30T18:38:39.106-04:00  INFO 3524 --- [water_bucket] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-08-30T18:38:39.233-04:00  INFO 3524 --- [water_bucket] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-30T18:38:39.244-04:00  INFO 3524 --- [water_bucket] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-30T18:38:39.669-04:00  INFO 3524 --- [water_bucket] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-30T18:38:39.767-04:00  INFO 3524 --- [water_bucket] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10168 ms
+2024-08-30T18:38:48.339-04:00 DEBUG 3524 --- [water_bucket] [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2024-08-30T18:38:48.845-04:00 DEBUG 3524 --- [water_bucket] [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-08-30T18:38:49.278-04:00 DEBUG 3524 --- [water_bucket] [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-08-30T18:38:49.930-04:00 DEBUG 3524 --- [water_bucket] [  restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-08-30T18:38:50.770-04:00  INFO 3524 --- [water_bucket] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-08-30T18:38:51.591-04:00  INFO 3524 --- [water_bucket] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-08-30T18:38:51.862-04:00  INFO 3524 --- [water_bucket] [  restartedMain] c.c.s.a.w.WaterBucketApplication         : Started WaterBucketApplication in 26.123 seconds (process running for 28.732)
+
+```
+
+### Main Endpoint
+
+```bash
+
+@RestController 
+@RequestMapping("/api/waterjug") public class WaterJugController {}
+
+```
+
+### Service Implementation
+
+```bash
+
+@Service 
+public class WaterJugService {}
+
+```
+
+### Request Model
+
+```bash
+
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
+public class WaterJugRequest { private int xCapacity; private int yCapacity; private int zAmountWanted; }
+
+```
+
+### Solution Model
+
+```bash
+
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
+public class SolutionWrapper { private List<SolutionStep> solution; }
+
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
+public class SolutionStep { private int x; private int y; private List<Step> steps; }
+
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
+public class Step { private String action; private int amount; }
+
+```
+
 ## Test and Deploy
 
 The base project considers the use of [maven profiles](https://maven.apache.org/guides/introduction/introduction-to-profiles.html), which allow different configurations depending on the environment in which the deployment will be made.
